@@ -12,19 +12,20 @@ router.get('/:slug', (req, res) => {
     if (!err) {
       res.render('show', { blog: blog })
     } else {
-      console.log(err)
+      res.redirect('/')
     }
   })
 })
 
 //handle posting of blogs
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   let blog = new Blog({
     title: req.body.title,
     author: req.body.author,
     description: req.body.description,
   })
-  blog.save(err => {
+  await blog.save(err => {
+    console.log(blog)
     if (!err) {
       res.redirect(`blogs/${blog.slug}`)
     } else {

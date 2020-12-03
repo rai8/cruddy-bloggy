@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 
 const PORT = process.env.PORT || 3000
 const blogRouter = require('./routes/blogs')
+const Blog = require('./models/Blog')
 
 //connecting to database
 mongoose
@@ -24,34 +25,11 @@ app.use(express.static('public'))
 app.use('/blogs', blogRouter)
 
 //root route
-app.get('/', (req, res) => {
-  const blogs = [
-    {
-      title: 'The information we do not need',
-      snippet:
-        'You,ve probably had of Lorem ipsum- it is the most used dummy text out there. People use it because it has a fairly',
-      author: 'Somtea codes',
-      createdAt: new Date(),
-      img: 'placeholder.jpg',
-    },
-    {
-      title: 'The information we do not need2',
-      snippet:
-        'You’ve probably heard of Lorem Ipsum before – it’s the most-used dummy text excerpt out there. People use it because it has a fairly',
-      author: 'Somtea Codes',
-      createdAt: new Date(),
-      img: 'placeholder.jpg',
-    },
-    {
-      title: 'The information we do not need3',
-      snippet:
-        'You’ve probably heard of Lorem Ipsum before – it’s the most-used dummy text excerpt out there. People use it because it has a fairly',
-      author: 'Somtea Codes',
-      createdAt: new Date(),
-      img: 'placeholder.jpg',
-    },
-  ]
-  res.render('index', { blogs: blogs })
+app.get('/', async (req, res) => {
+  await Blog.find({}, null, { sort: '-timeCreated' }, function (err, blogs) {
+    if (err) throw err
+    res.render('index', { blogs: blogs })
+  })
 })
 
 //listening to server

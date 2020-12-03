@@ -13,6 +13,10 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/string-strip-html/dist/string-strip-html.umd.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({ selector: 'textarea' })
+    </script>
     <title>New Blog post</title>
   </head>
   <body>
@@ -29,7 +33,7 @@
         </div>
         <div class="form-group">
           <label for="description" class="text-white">Description</label>
-          <textarea class="form-control" name="description" placeholder="Description" required></textarea>
+          <textarea class="form-control" name="description" placeholder="Description"></textarea>
         </div>
         <div class="form-group">
           <a href="/" class="btn btn-warning">Cancel</a>
