@@ -9,7 +9,7 @@ const blogRouter = require('./routes/blogs')
 
 //connecting to database
 mongoose
-  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(() => console.log('-----Database is successfulyy connected'))
   .catch(err => {
     if (err) throw err

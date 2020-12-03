@@ -5,16 +5,14 @@ const Blog = require('../models/Blog')
 router.get('/new', (req, res) => {
   res.render('new')
 })
-
 //getting a single post with its id
-router.get('/:id', (req, res) => {
-  const requestedId = req.params.id
-  Blog.findOne({ _id: requestedId }, (err, blog) => {
-    //console.log(blog)
-    if (err) {
-      console.log(err)
-    } else {
+
+router.get('/:slug', (req, res) => {
+  Blog.findOne({ slug: req.params.slug }, (err, blog) => {
+    if (!err) {
       res.render('show', { blog: blog })
+    } else {
+      console.log(err)
     }
   })
 })
@@ -26,11 +24,13 @@ router.post('/', (req, res) => {
     author: req.body.author,
     description: req.body.description,
   })
-  blog
-    .save()
-    .then(res.redirect(`blogs/${blog.id}`))
-    .catch(err => {
-      if (err) throw err
-    })
+  blog.save(err => {
+    if (!err) {
+      res.redirect(`blogs/${blog.slug}`)
+    } else {
+      console.log(err)
+    }
+  })
 })
+
 module.exports = router
