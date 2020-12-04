@@ -22,7 +22,7 @@
   <body>
     <div class="container">
       <h1 class="mb-4 text-white">New Blog Post</h1>
-      <form action="/blogs" method="post">
+      <form action="/blogs" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="title" class="text-white">Title</label>
           <input type="text" class="form-control" placeholder="Title" name="title" required />
@@ -34,6 +34,10 @@
         <div class="form-group">
           <label for="description" class="text-white">Description</label>
           <textarea class="form-control" name="description" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="image" class="text-white">Upload Image</label>
+          <input class="form-control-file text-white" type="file" name="image" id="image" />
         </div>
         <div class="form-group">
           <a href="/" class="btn btn-warning">Cancel</a>

@@ -1,6 +1,28 @@
 const express = require('express')
+const multer = require('multer') //handle image submission
 const router = express.Router()
 const Blog = require('../models/Blog')
+
+//defining sorage for the images
+const storage = multer.diskStorage({
+  //destination for files
+  destination: function (req, file, callback) {
+    callback(null, './public/uploads/images')
+  },
+  //by default multer strips back the extension
+  //to bring bakc the extension
+  filename: function (req, file, callback) {
+    callback(null, Date.now() + file.originalname)
+  },
+})
+
+//defining the upload parameters for multer
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 3,
+  },
+})
 
 router.get('/new', (req, res) => {
   res.render('new')
@@ -18,11 +40,13 @@ router.get('/:slug', (req, res) => {
 })
 
 //handle posting of blogs
-router.post('/', async (req, res) => {
+//the image is that passed in index.ejs name property
+router.post('/', upload.single('image'), async (req, res) => {
   let blog = new Blog({
     title: req.body.title,
     author: req.body.author,
     description: req.body.description,
+    img: req.file.filename,
   })
   await blog.save(err => {
     console.log(blog)
