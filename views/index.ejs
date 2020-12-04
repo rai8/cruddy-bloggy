@@ -41,9 +41,14 @@
                             <div class="more position-relative" style="cursor: pointer;">
                                 <i class="material-icons p-2">more_vert</i>
                                 <div class="d-none options card rounded-pill shadow-sm p-1 position-absolute">
-                                    <a href="/blogs/edit/<%= blog.id %>" class="rounded-circle p-2 mb-2" style="background:blue;">
+                                    <a href="/blogs/edit/<%= blog.id %>" class="rounded-circle p-1 mb-2" style="background:blue;">
                                         <i class="material-icons" style="color:white">create</i>
                                     </a>
+                                    <form action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
+                                        <button class="rounded-circle p-1 btn-danger">
+                                            <i class="material-icons" style="color:white">delete</i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

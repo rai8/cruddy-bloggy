@@ -59,8 +59,14 @@ router.put('/:id', async (req, res) => {
     res.redirect(`/blogs/${blog.slug}`)
   } catch (error) {
     console.log(error)
-    res.redirect(`/seblogs/edit/${blog.id}`, { blog: blog })
+    res.redirect(`/blogs/edit/${blog.id}`, { blog: blog })
   }
+})
+
+//handle deleeting of blog
+router.delete('/:id', async (req, res) => {
+  await Blog.findByIdAndDelete(req.params.id)
+  res.redirect('/')
 })
 
 module.exports = router
