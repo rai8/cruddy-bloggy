@@ -34,4 +34,33 @@ router.post('/', async (req, res) => {
   })
 })
 
+//handling updating and editing of content
+router.get('/edit/:id', async (req, res) => {
+  await Blog.findOne({ _id: req.params.id }, (err, blog) => {
+    if (!err) {
+      res.render('edit', { blog: blog })
+    } else {
+      res.redirect('/')
+    }
+  })
+})
+
+//route to handle update posts
+router.put('/:id', async (req, res) => {
+  req.blog = await Blog.findById(req.params.id)
+  let blog = req.blog
+  blog.title = req.body.title
+  blog.author = req.body.author
+  blog.description = req.body.description
+
+  try {
+    blog = await blog.save()
+    //redirect to the view route
+    res.redirect(`/blogs/${blog.slug}`)
+  } catch (error) {
+    console.log(error)
+    res.redirect(`/seblogs/edit/${blog.id}`, { blog: blog })
+  }
+})
+
 module.exports = router

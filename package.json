@@ -18,6 +18,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "jsdom": "^16.4.0",
+    "method-override": "^3.0.0",
     "mongoose": "^5.11.1",
     "mongoose-slug-generator": "^1.0.4",
     "string-strip-html": "^7.0.2"

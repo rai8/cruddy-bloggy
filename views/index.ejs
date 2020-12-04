@@ -41,7 +41,7 @@
                             <div class="more position-relative" style="cursor: pointer;">
                                 <i class="material-icons p-2">more_vert</i>
                                 <div class="d-none options card rounded-pill shadow-sm p-1 position-absolute">
-                                    <a href="#" class="rounded-circle p-2 mb-2" style="background:blue;">
+                                    <a href="/blogs/edit/<%= blog.id %>" class="rounded-circle p-2 mb-2" style="background:blue;">
                                         <i class="material-icons" style="color:white">create</i>
                                     </a>
                                 </div>
@@ -59,7 +59,7 @@
                                 <p style="font-size: 8px; line-height: 0.2rem;">
                                     <%= blog.timeCreated.toLocaleString() %></p>
                             </div>
-                            <a href="#" class=" align-self-end">
+                            <a href="/blogs/<%= blog.slug %>" class=" align-self-end">
                                 <i class='material-icons ml-3 text-black'>send</i>
                             </a>
                         </div>
@@ -72,7 +72,7 @@
 
 
         </div>
-        <script src="/js/index.js"></script>
+        <script src="/javascript/index.js"></script>
 
 </body>
 
